@@ -1,1 +1,1 @@
-export const OpenAIApiKey = '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';
+export const OpenAIApiKey = process.env.REACT_APP_OPENAI_API_KEY;

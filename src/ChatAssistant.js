@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Configuration, OpenAIApi } from 'openai';
-import { OpenAIApiKey, Test } from './Configs';
+import { OpenAIApiKey } from './Configs';
 import Vlogo from './Vlogo.png';
 import './App.css';
 
