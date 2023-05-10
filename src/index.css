@@ -66,6 +66,8 @@ code {
   overflow: auto;
   padding: 0px 10px;
   margin: 10px 0px;
+  display: flex;
+  flex-direction: column;
 }
 
 .chat-list::-webkit-scrollbar {

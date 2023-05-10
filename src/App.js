@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-d
 import './App.css';
 import ChatAssistant from './ChatAssistant';
 import ChatToChatTalk from './ChatToChatTalk';
+import ImageGeneration from './ImageGeneration';
 
 function App() {
   return (
@@ -17,6 +18,11 @@ function App() {
           path="/chattochattalk" 
           render={routeProps => (
             <ChatToChatTalk {...routeProps}/>)} 
+        />
+        <Route 
+          path="/imagegeneration" 
+          render={routeProps => (
+            <ImageGeneration {...routeProps}/>)} 
         />
         <Redirect to='/chatassistant' />
       </Switch>
