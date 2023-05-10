@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Configuration, OpenAIApi } from 'openai';
 import { OpenAIApiKey } from './Configs';
 import Vlogo from './Vlogo.png';
+import OpenAILogo from './openaiLogo.png';
 import './App.css';
 
 function App() {
@@ -81,6 +82,7 @@ function App() {
       <div className='wrapper'>
         <div className='logoContainer'>
           <img src={Vlogo} alt="Vlogo" className='vlogo' />
+          <img src={OpenAILogo} alt="OpenAILogo" className='openailogo' />
         </div>
         <div className='role-container'>
           <input placeholder='ex: you are a call center operator in vezeeta helping user to book appointments' className='role-input' type="text" value={roleQuery} onChange={e => setRoleQuery(e.target.value)} />
