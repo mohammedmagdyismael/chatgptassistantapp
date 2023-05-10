@@ -17,14 +17,14 @@ code {
 }
 
 .container {
-  padding: 30px;
+  padding: 10px;
   display: flex;
   flex-direction: row;
   justify-content: center;
 }
 
 .wrapper {
-  width: 70%;
+  width: 100%;
   height: calc(100vh - 60px);
 }
 
@@ -57,7 +57,7 @@ code {
 }
 
 .chat-list {
-  min-height: calc(100vh - 250px);
+  height: calc(100vh - 250px);
   overflow: auto;
   padding: 0px 10px;
   margin: 10px 0px;
@@ -89,11 +89,43 @@ textarea {
 }
 
 .role-container {
-  padding: 10px 120px 10px;
+  display: flex;
+  padding: 10px 0px 10px;
 }
 
 .role-input {
-  width: 85%;
+  width: 100%;
   min-width: 70px;
   margin-right: 5px;
 }
+
+.role-input-btn {
+  min-width: 125px;
+}
+
+.submit-msg-btn {
+  margin-top: 5px;
+  min-width: 100%;
+}
+
+.query-input {
+  width: calc(100vw - 27px);
+}
+
+@media only screen and (max-width: 400px) {
+  .role-container {
+    display: flex;
+    padding: 10px 0px 10px;
+    flex-direction: column;
+  }
+  
+  .role-input {
+    width: calc(100vw - 27px);
+    margin-right: 0px;
+  }
+  .role-input-btn {
+    margin-top: 5px;
+    min-width: 100%;
+  }
+}
+
