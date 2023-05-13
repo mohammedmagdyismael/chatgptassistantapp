@@ -1,22 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Configuration, OpenAIApi } from 'openai';
-import { OpenAIApiKey } from './Configs';
+import { CHAT_ROLES } from './Configs';
+import { dialogAnalysis } from './ChatAssistants/ChatTemplateAnalysis';
 import Vlogo from './Vlogo.png';
 import OpenAILogo from './openaiLogo.png';
 import './App.css';
 
 function App() {
-
-  const CHAT_ROLES = {
-    USER: 'user',
-    ASSITANT: 'assistant',
-    SYSTEM: 'system',
-  }
-
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState([]);
   const [botResponse, setResponse] = useState('');
-  const [roleQuery, setRoleQuery] = useState('');
 
   const scrollDownChatList = () =>  {
     setTimeout(() => {
@@ -32,30 +24,26 @@ function App() {
     scrollDownChatList();
   }, [botResponse])
 
-  const configuration = new Configuration({
-    apiKey: OpenAIApiKey,
-  });
-  const openai = new OpenAIApi(configuration);
-
   const handleMessageSubmit = async (event) => {
     event.preventDefault();
-    const message = {
-      content: input,
-      role: CHAT_ROLES.USER,
-      name: 'Patient'
-    };
-    const messagesQueue = [...messages, message];
+    let messagesQueue = [];
+    if (input) {
+      const message = {
+        content: input,
+        role: CHAT_ROLES.USER,
+      };
+      messagesQueue = [...messages, message];
+    }else {
+      messagesQueue = [...messages];
+    }
+
     setMessages(messagesQueue);
     setInput('');
     scrollDownChatList();
-    const response = await openai.createChatCompletion({
-      model: "gpt-3.5-turbo",
-      messages: [...messagesQueue],
-      user: "veez-test"
-    });
-    
+    const response = await dialogAnalysis(messagesQueue)
+
     const botMessage = {
-      content: response.data.choices[0].message.content,
+      content: response,
       role: CHAT_ROLES.ASSITANT,
     };
     setResponse(botMessage);
@@ -65,30 +53,12 @@ function App() {
     setInput(event.target.value);
   };
 
-
-  const submitRole = () => {
-    if (roleQuery) {
-      setMessages([{
-        content: roleQuery,
-        role: CHAT_ROLES.SYSTEM,
-      }])
-    } else {
-      setMessages([])
-    }
-  };
-
-
-
   return (
     <div className='container'>
       <div className='wrapper'>
         <div className='logoContainer'>
           <img src={Vlogo} alt="Vlogo" className='vlogo' />
           <img src={OpenAILogo} alt="OpenAILogo" className='openailogo' />
-        </div>
-        <div className='role-container'>
-          <input placeholder='ex: you are a call center operator in vezeeta helping user to book appointments' className='role-input' type="text" value={roleQuery} onChange={e => setRoleQuery(e.target.value)} />
-          <button className='role-input-btn' onClick={() => submitRole()} type="submit">Set Role</button>
         </div>
         <div className='chat-list'>
           {messages.map((message, index) => {
