@@ -3,7 +3,7 @@ const fs = require("fs");
 
 const uploadFiles = async () => {
     const configuration = new Configuration({
-        apiKey: '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',
+        apiKey: '',
       });
       
       const openai = new OpenAIApi(configuration);

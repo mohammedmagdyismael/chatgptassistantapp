@@ -15,7 +15,7 @@ export const getChatContext = async (messagesQueue, openai) => {
         ],
       });
       resolve(resp);
-    }, delayIntervalInMillSec);
+    }, 500);
   });
 
   message = parseText(contextResponse.data.choices[0].message.content);
