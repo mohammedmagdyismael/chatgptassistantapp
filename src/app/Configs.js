@@ -4,6 +4,7 @@ export const CHAT_ROLES = {
     USER: 'user',
     ASSITANT: 'assistant',
     SYSTEM: 'system',
+    TICKET: 'ticket'
 };
 
 export const delayIntervalInMillSec = 5000;
