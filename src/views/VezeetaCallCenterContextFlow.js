@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { CHAT_ROLES } from './Configs';
-import { dialogAnalysis } from './ChatAssistants/ChatTemplateAnalysis';
-import Vlogo from './Vlogo.png';
-import OpenAILogo from './openaiLogo.png';
-import './App.css';
+import { CHAT_ROLES } from '../app/Configs';
+import { dialogAnalysis } from '../ChatAssistants/ChatTemplateAnalysis';
 
 function App() {
   const [input, setInput] = useState('');
@@ -54,12 +51,7 @@ function App() {
   };
 
   return (
-    <div className='container'>
-      <div className='wrapper'>
-        <div className='logoContainer'>
-          <img src={Vlogo} alt="Vlogo" className='vlogo' />
-          <img src={OpenAILogo} alt="OpenAILogo" className='openailogo' />
-        </div>
+      <div>
         <div className='chat-list'>
           {messages.map((message, index) => {
             if (message.role !== CHAT_ROLES.SYSTEM) {
@@ -68,7 +60,7 @@ function App() {
                   <p className={message.role === CHAT_ROLES.USER ? 'role-user' : 'role-assistant'}>
                     {message.role}
                   </p>
-                  <p className={message.role === CHAT_ROLES.USER ? 'user-message' : 'bot-message'}>
+                  <p className={message.role === CHAT_ROLES.USER ? 'user-message' : 'assistant-message'}>
                     {message.content}
                   </p>
                 </div>
@@ -82,7 +74,6 @@ function App() {
           <button className='submit-msg-btn' type="submit">Send</button>
         </form>
       </div>
-    </div>
   );
 }
 

@@ -212,3 +212,8 @@ textarea {
 .link:hover {
   background: aliceblue;
 }
+
+.selected-link {
+  color: #fff;
+  background: #00417a !important;
+}

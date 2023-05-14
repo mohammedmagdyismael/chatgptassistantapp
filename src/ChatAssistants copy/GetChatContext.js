@@ -1,5 +1,5 @@
 import { CHAT_ROLES, delayIntervalInMillSec } from '../app/Configs';
-import { parseText, contexts } from '../app/VezeetaAssits/helper';
+import { parseText, contexts } from './helper';
 
 export const getChatContext = async (messagesQueue, openai) => {
   let message = '';
@@ -15,7 +15,7 @@ export const getChatContext = async (messagesQueue, openai) => {
         ],
       });
       resolve(resp);
-    }, 500);
+    }, delayIntervalInMillSec);
   });
 
   message = parseText(contextResponse.data.choices[0].message.content);

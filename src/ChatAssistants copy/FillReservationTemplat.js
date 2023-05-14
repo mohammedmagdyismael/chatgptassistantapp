@@ -1,5 +1,5 @@
 import { CHAT_ROLES, delayIntervalInMillSec } from '../app/Configs';
-import { parseText, reservatioTemplate } from '../app/VezeetaAssits/helper';
+import { parseText, reservatioTemplate } from './helper';
 
 
 export const fillReservationTemplate = async (messagesQueue, openai) => {
