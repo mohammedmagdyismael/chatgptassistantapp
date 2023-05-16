@@ -90,6 +90,8 @@ function App() {
             return '';
             })}
         </div>
+
+        <p style={{ margin: '10px 0', fontSize: '14px', height: '18px' }}>{messages?.length && messages[messages.length - 1].role === CHAT_ROLES.USER ? 'typing ...' : ''}</p>
         <form onSubmit={handleMessageSubmit}>
           <textarea className='query-input' name="Text1" cols="42" rows="5" value={input} onChange={handleChange} />
           <button className='submit-msg-btn' type="submit">Send</button>

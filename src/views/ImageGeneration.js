@@ -40,7 +40,7 @@ function App({ openai }) {
     <div>
       <div className='chat-list' >
         {messages.map((img, i) => (
-          <img style={{ width: '250px', margin: '5px auto' }} src={img} alt={`${i}`} />
+          <img style={{ width: '440px', margin: '5px auto' }} src={img} alt={`${i}`} />
         ))}
       </div>
       <form onSubmit={handleMessageSubmit}>

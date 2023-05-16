@@ -2,10 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import { setupOpenAI } from './app/SetupOpenAI';
 import Layout from './components/Layout/Layout';
-// import ChatAssistant from './ChatAssistant';
-import ChatToChatTalk from './views/ChatToChatTalk';
-import ChatReservation from './views/VezeetaCallCenterContextFlow';
 
+import ChatToChatTalk from './views/ChatToChatTalk';
 import KeyWordsExtraction from './views/KeyWordsExtraction';
 import ReviewsClassification from './views/ReviewClassification';
 import ImageGeneration from './views/ImageGeneration';
