@@ -11,6 +11,7 @@ import ContentWriter from './views/ContentWriter';
 import ChatAssistant from './views/ChatAssistant';
 import VezeetaCallCenter from './views/VezeetaCallCenter';
 import VezeetaCallCenterContextFlow from './views/VezeetaCallCenterContextFlow';
+import PharmaciesFiles from './views/PharmaciesFiles';
 
 function App() {
   const openai = setupOpenAI();
@@ -58,7 +59,12 @@ function App() {
             render={routeProps => (
               <ImageGeneration openai={openai} {...routeProps}/>)} 
           />
-          <Redirect to='/chatassistant' />
+          <Route 
+            path="/pharmaciesfiles" 
+            render={routeProps => (
+              <PharmaciesFiles openai={openai} {...routeProps}/>)} 
+          />
+          <Redirect to='/pharmaciesfiles' />
         </Switch>
       </Router>
     </Layout>

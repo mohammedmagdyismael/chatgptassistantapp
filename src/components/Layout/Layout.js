@@ -26,6 +26,7 @@ const Layout = ({ children }) => {
                             <a className={`link ${window.location.pathname === '/keywordextraction' && 'selected-link' }`} href='/keywordextraction'>OpenAI Chat Assistant (Key Word Extraction)</a>
                             <a className={`link ${window.location.pathname === '/imagegeneration' && 'selected-link' }`} href='/imagegeneration'>Image Generation</a>
                             <a className={`link ${window.location.pathname === '/chattochattalk' && 'selected-link' }`} href='/chattochattalk'>Bot to Bot Chat</a>
+                            <a className={`link ${window.location.pathname === '/pharmaciesfiles' && 'selected-link' }`} href='/pharmaciesfiles'>Pharmacies Files</a>
                         </div>
                     </div>
                 )}
