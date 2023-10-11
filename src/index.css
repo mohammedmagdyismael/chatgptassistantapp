@@ -233,21 +233,37 @@ textarea {
   display: flex;
 }
 
-#cell-header {
-  width: 50%;
+#cell-header-file {
+  width: 100%;
+  margin: 0;
+  font-weight: 700;
+  margin-left: 20px;
+}
+
+#cell-header-date {
+  width: 280px;
   margin: 0;
   text-align: center;
   font-weight: 700;
 }
 
 #file-name {
-  width: 50%;
+  width: 100%;
   text-align: center;
-  margin-left: 160px;
+  margin-left: 20px;
 }
 
 #file-date {
-  width: 50%;
+  width: 280px;
   text-align: center;
   margin: 0;
+}
+
+#tables-container {
+  display: flex;
+  width: 100%;
+}
+
+#files-table {
+  width: 50%;
 }
