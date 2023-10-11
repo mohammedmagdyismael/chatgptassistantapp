@@ -2,9 +2,6 @@ import AWS from "aws-sdk";
 import { useState, useEffect } from "react";
 
 function App() {
-
-    console.log(process.env.REACT_APP_AWS_S3_ACCESS_KEY)
-
     const [files, setFilesList] = useState([]);
     const formatDateTime = (dateString, langCode) => {
       const day = new Date(`${dateString}Z`).toLocaleString(langCode, { day: '2-digit' });
@@ -27,7 +24,6 @@ function App() {
         }),
       });
       const s3 = new AWS.S3();
-      
       s3.listObjects(
         { Bucket: process.env.REACT_APP_BUCKET_NAME, Prefix: process.env.REACT_APP_BUCKET_PREFIX_NAME },
         (err, data) => {
@@ -38,6 +34,7 @@ function App() {
             data.Contents.forEach((object) => {
               temp.push({ file: `${process.env.REACT_APP_CDN_URL}/${object.Key}`, name: object.Key, date: formatDateTime(object.LastModified, 'en-EG')});
             });
+            temp.sort((objectA, objectB) => new Date(objectB.date) - new Date(objectA.date))
             setFilesList(temp);
           }
         });
@@ -50,10 +47,10 @@ function App() {
       </div>
       <div id="table-header">
         <p id="cell-header">File</p>
-        <p id="cell-header">Date</p>
+        <p id="cell-header">Date (by latest)</p>
       </div>
       <div>
-        {files?.map(file => (<div id="table-row" key={file.date}><a id="file-name" href={file.file} target="_blank">{file.name}</a><p id="file-date">{file.date}</p></div>))}
+        {files?.map(file => (<div id="table-row" key={file.date}><div style={{ width: '50%' }}><a id="file-name" href={file.file} target="_blank">{file.name}</a></div><p id="file-date">{file.date}</p></div>))}
       </div>
     </div>
   );

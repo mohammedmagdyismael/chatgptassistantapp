@@ -243,6 +243,7 @@ textarea {
 #file-name {
   width: 50%;
   text-align: center;
+  margin-left: 160px;
 }
 
 #file-date {
