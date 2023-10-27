@@ -27,6 +27,22 @@ export const getFiles = (s3Instant, directoryPrefix, callBack) => {
     });
 }
 
+export const getFile = (s3Instant, objectKey, callBack) => {
+  const params = {
+    Bucket: process.env.REACT_APP_BUCKET_NAME,
+    Key: objectKey
+  };
+  
+  s3Instant?.getObject(params, (err, data) => {
+    if (err) {
+      console.log('Error occurred while reading the file:', err);
+    } else {
+      const fileContent = data.Body.toString();
+      callBack(fileContent);
+    }
+  });
+}
+
 export const status = {
   SUBMITTING: 'Uploading File ....',
   SUCCESS: 'File Uploaded Successfully !',

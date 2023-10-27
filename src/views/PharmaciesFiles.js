@@ -1,6 +1,6 @@
 import AWS from "aws-sdk";
 import { useState, useEffect, useRef } from "react";
-import { status, getFiles } from './helper'
+import { status, getFiles, getFile } from './helper'
 
 function App() {
     let fileInput = useRef();
@@ -8,6 +8,7 @@ function App() {
     const [s3, setS3Instant] = useState(undefined);
     const [pharmaciesFilesList, setPharmaciesFilesList] = useState([]);
     const [mappedPharmaciesFilesList, setMappedPharmaciesFilesList] = useState([]);
+    const [mappingLog, setMappingLog] = useState('');
 
     // Setup AWS Configs
     useEffect(() => {
@@ -25,6 +26,10 @@ function App() {
       if (uploadFileStatus === status.SUCCESS || uploadFileStatus === '') {
         getFiles(s3, 'pharmacies_mapped/', setMappedPharmaciesFilesList);
         getFiles(s3, 'pharmacies_files/', setPharmaciesFilesList);
+
+        setInterval(() => {
+          getFile(s3, 'mapping_logs/mapping_progress.txt', setMappingLog)
+        }, 200);
       }
     }, [s3, uploadFileStatus]);
 
@@ -56,6 +61,7 @@ function App() {
   return (
     <div className="App">
 
+      {/** Upload File */}
       <div style={{ marginBottom: '30px' }}>
         <div>
           <p id="pharmacies-files-title">Upload Pharmacy File:</p>
@@ -75,6 +81,30 @@ function App() {
         <p style={{ fontSize: '15px' }}>{uploadFileStatus}</p>
       </div>
 
+      {/** Mapping Log */}
+      <div style={{ marginBottom: '20px' }}>
+        <div>
+          <p id="pharmacies-files-title">Mapping Log:</p>
+        </div>
+        
+        <div
+          style={{
+            height: '130px',
+            overflow: 'auto'
+          }}
+        >
+        <p style={{
+          fontSize: '15px', 
+          margin: '0',
+          display: 'flex',
+          gap: '8px',
+          whiteSpace: 'pre-line',
+          }}>{mappingLog}</p>
+        </div>
+      </div>
+
+
+      {/** Files */}
       <div id="tables-container">
         <div id="files-table">
           <div>
