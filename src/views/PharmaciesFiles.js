@@ -84,7 +84,7 @@ function App() {
       {/** Mapping Log */}
       <div style={{ marginBottom: '20px' }}>
         <div>
-          <p id="pharmacies-files-title">Mapping Log:</p>
+          <p id="pharmacies-files-title">Mapping Log: <a href={`${process.env.REACT_APP_CDN_URL}/mapping_logs/mapping_progress.txt`}>(Log File)</a> </p>
         </div>
         
         <div
