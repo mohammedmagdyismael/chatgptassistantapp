@@ -43,6 +43,24 @@ export const getFile = (s3Instant, objectKey, callBack) => {
   });
 }
 
+export const appendNewFileToMappingQ = (s3Instant, objectKey, content) => {
+  getFile(s3Instant, objectKey, payload => {
+    const params = {
+      Bucket: process.env.REACT_APP_BUCKET_NAME,
+      Key: objectKey,
+      Body: `${payload}\n${String(content).replaceAll(' ', '%20')}`,
+      ACL: 'public-read',
+    };
+    s3Instant?.putObject(params, (err, data) => {
+      if (err) {
+        console.error('Error writing file to S3:', err);
+      } else {
+        console.log('File written to S3 successfully:', data);
+      }
+    });
+  })
+}
+
 export const status = {
   SUBMITTING: 'Uploading File ....',
   SUCCESS: 'File Uploaded Successfully !',

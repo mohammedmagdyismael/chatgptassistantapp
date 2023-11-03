@@ -1,6 +1,6 @@
 import AWS from "aws-sdk";
 import { useState, useEffect, useRef } from "react";
-import { status, getFiles, getFile } from './helper'
+import { status, getFiles, getFile, appendNewFileToMappingQ } from './helper';
 
 function App() {
     let fileInput = useRef();
@@ -29,7 +29,7 @@ function App() {
 
         setInterval(() => {
           getFile(s3, 'mapping_logs/mapping_progress.txt', setMappingLog)
-        }, 200);
+        }, 15000);
       }
     }, [s3, uploadFileStatus]);
 
@@ -51,7 +51,9 @@ function App() {
               Key: `pharmacies_files/${file.name}`,
               ACL: 'public-read',
             }
-          ).promise();
+          ).promise().then(resp => {
+            appendNewFileToMappingQ(s3, 'mapping_logs/mapping_q.txt', `${process.env.REACT_APP_CDN_URL}/pharmacies_files/${file.name}`)
+          });
           setUploadFileStatus(status.SUCCESS);
           console.log('File uploaded successfully:', data);
         }
@@ -64,7 +66,7 @@ function App() {
       {/** Upload File */}
       <div style={{ marginBottom: '30px' }}>
         <div>
-          <p id="pharmacies-files-title">Upload Pharmacy File:</p>
+          <p id="pharmacies-files-title">Upload Pharmacy File: (make sure the items column labeled "name")</p>
         </div>
         <input
             style={{ width: '100%' }}
@@ -115,7 +117,7 @@ function App() {
             <p id="cell-header-date">Date (by latest)</p>
           </div>
           <div>
-            {pharmaciesFilesList?.map(file => (<div id="table-row" key={file.date}><div style={{ width: '100%' }}><a id="file-name" href={file.file} target="_blank">{file.name}</a></div><p id="file-date">{file.date}</p></div>))}
+            {pharmaciesFilesList?.map((file, index) => (<div id="table-row" key={`${file.date}-${file.date}-${index}`}><div style={{ width: '100%' }}><a id="file-name" href={file.file} target="_blank">{file.name}</a></div><p id="file-date">{file.date}</p></div>))}
           </div>
         </div>
         <div id="files-table">
@@ -127,7 +129,7 @@ function App() {
             <p id="cell-header-date">Date (by latest)</p>
           </div>
           <div>
-            {mappedPharmaciesFilesList?.map(file => (<div id="table-row" key={file.date}><div style={{ width: '100%' }}><a id="file-name" href={file.file} target="_blank">{file.name}</a></div><p id="file-date">{file.date}</p></div>))}
+            {mappedPharmaciesFilesList?.map((file, index) => (<div id="table-row" key={`${file.date}-${file.date}-${index}`}><div style={{ width: '100%' }}><a id="file-name" href={file.file} target="_blank">{file.name}</a></div><p id="file-date">{file.date}</p></div>))}
           </div>
         </div>
       </div>
