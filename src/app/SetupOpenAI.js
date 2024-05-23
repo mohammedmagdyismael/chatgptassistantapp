@@ -1,9 +1,10 @@
-import { Configuration, OpenAIApi } from 'openai';
+import OpenAI from 'openai';
 import { OpenAIApiKey } from './Configs';
 
 export const setupOpenAI = () => {
-    const configuration = new Configuration({
-        apiKey: OpenAIApiKey,
-      });
-    return new OpenAIApi(configuration);
+  const client = new OpenAI({
+    apiKey: OpenAIApiKey,
+    dangerouslyAllowBrowser: true,
+  });
+    return client;
 }

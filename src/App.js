@@ -3,15 +3,8 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-d
 import { setupOpenAI } from './app/SetupOpenAI';
 import Layout from './components/Layout/Layout';
 
-import ChatToChatTalk from './views/ChatToChatTalk';
-import KeyWordsExtraction from './views/KeyWordsExtraction';
-import ReviewsClassification from './views/ReviewClassification';
-import ImageGeneration from './views/ImageGeneration';
-import ContentWriter from './views/ContentWriter';
-import ChatAssistant from './views/ChatAssistant';
-import VezeetaCallCenter from './views/VezeetaCallCenter';
-import VezeetaCallCenterContextFlow from './views/VezeetaCallCenterContextFlow';
-import PharmaciesFiles from './views/PharmaciesFiles';
+import PharmaciesMasterLisrMapping from './views/PharmaciesMasterLisrMapping';
+import GPTModels from './views/GPTModels';
 
 function App() {
   const openai = setupOpenAI();
@@ -19,50 +12,15 @@ function App() {
     <Layout>
       <Router>
         <Switch>
-          <Route 
-            path="/chatassistant" 
+        <Route 
+            path="/gpts" 
             render={routeProps => (
-              <ChatAssistant openai={openai} {...routeProps}/>)} 
-          />
-          <Route 
-            path="/vezeetacallCenter" 
-            render={routeProps => (
-              <VezeetaCallCenter openai={openai} {...routeProps}/>)} 
-          />
-          <Route 
-            path="/vezeetaCallCentercontextflow" 
-            render={routeProps => (
-              <VezeetaCallCenterContextFlow openai={openai} {...routeProps}/>)} 
-          />
-          <Route 
-            path="/contentwriter" 
-            render={routeProps => (
-              <ContentWriter openai={openai} {...routeProps}/>)} 
-          />
-          <Route 
-            path="/reviewsclassification" 
-            render={routeProps => (
-              <ReviewsClassification openai={openai} {...routeProps}/>)} 
-          />
-          <Route 
-            path="/keywordextraction" 
-            render={routeProps => (
-              <KeyWordsExtraction openai={openai} {...routeProps}/>)} 
-          />
-          <Route 
-            path="/chattochattalk" 
-            render={routeProps => (
-              <ChatToChatTalk openai={openai} {...routeProps}/>)} 
-          />
-          <Route 
-            path="/imagegeneration" 
-            render={routeProps => (
-              <ImageGeneration openai={openai} {...routeProps}/>)} 
+              <GPTModels openaiClient={openai} {...routeProps}/>)} 
           />
           <Route 
             path="/pharmaciesfiles" 
             render={routeProps => (
-              <PharmaciesFiles openai={openai} {...routeProps}/>)} 
+              <PharmaciesMasterLisrMapping openai={openai} {...routeProps}/>)} 
           />
           <Redirect to='/pharmaciesfiles' />
         </Switch>
