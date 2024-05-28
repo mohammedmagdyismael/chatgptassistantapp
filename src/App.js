@@ -4,6 +4,7 @@ import { setupOpenAI } from './app/SetupOpenAI';
 import Layout from './components/Layout/Layout';
 
 import PharmaciesMasterLisrMapping from './views/PharmaciesMasterLisrMapping';
+import Assistants from './views/Assistant';
 import GPTModels from './views/GPTModels';
 
 function App() {
@@ -21,6 +22,11 @@ function App() {
             path="/pharmaciesfiles" 
             render={routeProps => (
               <PharmaciesMasterLisrMapping openai={openai} {...routeProps}/>)} 
+          />
+          <Route 
+            path="/assistants" 
+            render={routeProps => (
+              <Assistants openaiClient={openai} {...routeProps}/>)} 
           />
           <Redirect to='/pharmaciesfiles' />
         </Switch>
