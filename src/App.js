@@ -4,6 +4,7 @@ import { setupOpenAI } from './app/SetupOpenAI';
 import Layout from './components/Layout/Layout';
 
 import PharmaciesMasterLisrMapping from './views/PharmaciesMasterLisrMapping';
+import ImageToText from './views/ImageToText';
 import Assistants from './views/Assistant';
 import GPTModels from './views/GPTModels';
 
@@ -27,6 +28,11 @@ function App() {
             path="/assistants" 
             render={routeProps => (
               <Assistants openaiClient={openai} {...routeProps}/>)} 
+          />
+          <Route 
+            path="/imagetotext" 
+            render={routeProps => (
+              <ImageToText openaiClient={openai} {...routeProps}/>)} 
           />
           <Redirect to='/pharmaciesfiles' />
         </Switch>

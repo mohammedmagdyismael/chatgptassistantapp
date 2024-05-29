@@ -20,6 +20,7 @@ const Layout = ({ children }) => {
                         <div className='links-container'>
                             <a className={`link ${window.location.pathname === '/gpts' && 'selected-link' }`} href='/gpts'>GPT Models</a>
                             <a className={`link ${window.location.pathname === '/assistants' && 'selected-link' }`} href='/assistants'>Assistants</a>
+                            <a className={`link ${window.location.pathname === '/imagetotext' && 'selected-link' }`} href='/imagetotext'>Image to Text</a>
                             <a className={`link ${window.location.pathname === '/pharmaciesfiles' && 'selected-link' }`} href='/pharmaciesfiles'>Pharmacies Files</a>
                         </div>
                     </div>
